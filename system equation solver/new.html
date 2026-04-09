@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4D SLAE: RGB Channels Decomposition</title>
+    <link rel="stylesheet" href="analysis.css">
+</head>
+
+<body>
+
+    <h2>4D SLAE: Equation Triplets Decomposition (RGB Channels)</h2>
+
+    <div class="container">
+        <!-- Боковая панель -->
+        <div class="sidebar">
+            <div class="panel">
+                <h3><span class="color-dot" style="background:#fff"></span>Eq 1 (Hyperplane A)</h3>
+                <div class="eq-row">
+                    <div class="var-group"><input type="checkbox" id="l-a1" title="Lock A1"><input type="number" id="a1"
+                            value="1"></div> X +
+                    <div class="var-group"><input type="checkbox" id="l-b1" title="Lock B1"><input type="number" id="b1"
+                            value="1"></div> Y +
+                    <div class="var-group"><input type="checkbox" id="l-c1" title="Lock C1"><input type="number" id="c1"
+                            value="1"></div> Z +
+                    <div class="var-group"><input type="checkbox" id="l-d1" title="Lock D1"><input type="number" id="d1"
+                            value="1"></div> W =
+                    <div class="var-group"><input type="checkbox" id="l-e1" title="Lock E1"><input type="number" id="e1"
+                            value="10"></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3><span class="color-dot" style="background:#ddd"></span>Eq 2 (Hyperplane B)</h3>
+                <div class="eq-row">
+                    <div class="var-group"><input type="checkbox" id="l-a2" title="Lock A2"><input type="number" id="a2"
+                            value="2"></div> X +
+                    <div class="var-group"><input type="checkbox" id="l-b2" title="Lock B2"><input type="number" id="b2"
+                            value="-1"></div> Y +
+                    <div class="var-group"><input type="checkbox" id="l-c2" title="Lock C2"><input type="number" id="c2"
+                            value="1"></div> Z +
+                    <div class="var-group"><input type="checkbox" id="l-d2" title="Lock D2"><input type="number" id="d2"
+                            value="-1"></div> W =
+                    <div class="var-group"><input type="checkbox" id="l-e2" title="Lock E2"><input type="number" id="e2"
+                            value="0"></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3><span class="color-dot" style="background:#bbb"></span>Eq 3 (Hyperplane C)</h3>
+                <div class="eq-row">
+                    <div class="var-group"><input type="checkbox" id="l-a3" title="Lock A3"><input type="number" id="a3"
+                            value="-1"></div> X +
+                    <div class="var-group"><input type="checkbox" id="l-b3" title="Lock B3"><input type="number" id="b3"
+                            value="2"></div> Y +
+                    <div class="var-group"><input type="checkbox" id="l-c3" title="Lock C3"><input type="number" id="c3"
+                            value="-1"></div> Z +
+                    <div class="var-group"><input type="checkbox" id="l-d3" title="Lock D3"><input type="number" id="d3"
+                            value="1"></div> W =
+                    <div class="var-group"><input type="checkbox" id="l-e3" title="Lock E3"><input type="number" id="e3"
+                            value="3"></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3><span class="color-dot" style="background:#999"></span>Eq 4 (Hyperplane D)</h3>
+                <div class="eq-row">
+                    <div class="var-group"><input type="checkbox" id="l-a4" title="Lock A4"><input type="number" id="a4"
+                            value="1"></div> X +
+                    <div class="var-group"><input type="checkbox" id="l-b4" title="Lock B4"><input type="number" id="b4"
+                            value="1"></div> Y +
+                    <div class="var-group"><input type="checkbox" id="l-c4" title="Lock C4"><input type="number" id="c4"
+                            value="-2"></div> Z +
+                    <div class="var-group"><input type="checkbox" id="l-d4" title="Lock D4"><input type="number" id="d4"
+                            value="3"></div> W =
+                    <div class="var-group"><input type="checkbox" id="l-e4" title="Lock E4"><input type="number" id="e4"
+                            value="4"></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3 style="color: #fff;">Mapping Domain</h3>
+                <div class="domain-row">
+                    <span>X Domain</span>
+                    <input type="number" id="xmin" value="-2" step="1">
+                    <input type="number" id="xmax" value="6" step="1">
+                </div>
+                <div class="domain-row">
+                    <span>Y Domain</span>
+                    <input type="number" id="ymin" value="-2" step="1">
+                    <input type="number" id="ymax" value="6" step="1">
+                </div>
+                <div class="domain-row">
+                    <span>Z Domain</span>
+                    <input type="number" id="zmin" value="-2" step="1">
+                    <input type="number" id="zmax" value="6" step="1">
+                </div>
+                <div class="domain-row">
+                    <span>W Domain</span>
+                    <input type="number" id="wmin" value="-2" step="1">
+                    <input type="number" id="wmax" value="6" step="1">
+                </div>
+            </div>
+
+            <div class="exact-solution" id="solution-box">
+                Analytical Solution:<br> Intersection point not found.
+            </div>
+        </div>
+
+        <div class="visuals-container">
+            <div class="visuals"
+                style="text-align: center; border: 1px solid rgba(255,255,255,0.05); background: rgba(20,20,20,0.5);">
+                <h4 style="margin-top: 0; color: #aaa; font-weight: normal; margin-bottom: 20px;">
+                    Inverse Kinematics Workspace (2D Tool)<br>
+                    <span style="font-size: 14px; margin-top: 5px; display: inline-block;">
+                        H-Axis: <select id="ik-x" class="axis-select">
+                            <option value="0" selected>X</option>
+                            <option value="1">Y</option>
+                            <option value="2">Z</option>
+                            <option value="3">W</option>
+                        </select>
+                        V-Axis: <select id="ik-y" class="axis-select">
+                            <option value="0">X</option>
+                            <option value="1" selected>Y</option>
+                            <option value="2">Z</option>
+                            <option value="3">W</option>
+                        </select>
+                    </span>
+                    <span style="font-size: 14px; margin-top: 5px; margin-left: 15px; display: inline-block;">
+                        <label><input type="checkbox" id="ik-error-intensity" checked> Apply Error Darkness</label>
+                    </span>
+                </h4>
+                <div style="font-size: 13px; color: #888; margin-bottom: 10px;">Drag target to solve coefficients. Extruded axes map to Red & Green. Darkness = Error.</div>
+
+                <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 25px; margin-top: 15px;">
+                    <div id="ik-legend-g-label" style="font-size:11px; color:var(--c-green); font-weight:bold; writing-mode: vertical-lr; transform: rotate(180deg); margin-right: 15px;">Extruded 2 (Green)</div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <canvas id="ik-legend-2d" width="100" height="100" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"></canvas>
+                        <div id="ik-legend-r-label" style="font-size:11px; color:var(--c-red); font-weight:bold; margin-top: 10px;">Extruded 1 (Red)</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <canvas id="ikCanvas" width="400" height="300"
+                        style="background: rgba(0,0,0,0); border-radius: 4px;"></canvas>
+                </div>
+            </div>
+
+            <div class="visuals">
+                <h4 style="margin-top: 0; color: #aaa; font-weight: normal;">
+                    1D Projection. Horizontal Axis:
+                    <select id="graph-x" class="axis-select">
+                        <option value="0">X</option>
+                        <option value="1">Y</option>
+                        <option value="2">Z</option>
+                        <option value="3" selected>W</option>
+                    </select>
+                </h4>
+
+                <canvas id="graph1d" width="900" height="290"></canvas>
+
+                <div class="legend-area">
+                    <div class="legend-bars">
+                        <div class="legend-bar-item">
+                            <div style="font-size:12px; color:var(--c-red); margin-bottom:5px; font-weight:bold;">Y
+                                Intensity (Red)</div>
+                            <canvas id="legend-y" width="280" height="25"></canvas>
+                        </div>
+                        <div class="legend-bar-item">
+                            <div style="font-size:12px; color:var(--c-green); margin-bottom:5px; font-weight:bold;">Z
+                                Intensity (Green)</div>
+                            <canvas id="legend-z" width="280" height="25"></canvas>
+                        </div>
+                        <div class="legend-bar-item">
+                            <div style="font-size:12px; color:var(--c-blue); margin-bottom:5px; font-weight:bold;">W
+                                Intensity (Blue)</div>
+                            <canvas id="legend-w" width="280" height="25"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="visuals"
+                style="text-align: center; border: 1px solid rgba(255,255,255,0.05); background: rgba(20,20,20,0.5);">
+                <h4 style="margin-top: 0; color: #aaa; font-weight: normal; margin-bottom: 20px;">
+                    RGB Map <br>
+                    <span style="font-size: 14px; margin-top: 5px; display: inline-block;">
+                        R: <select id="rgb-r" class="axis-select">
+                            <option value="0" selected>X</option>
+                            <option value="1">Y</option>
+                            <option value="2">Z</option>
+                            <option value="3">W</option>
+                        </select>
+                        G: <select id="rgb-g" class="axis-select">
+                            <option value="0">X</option>
+                            <option value="1" selected>Y</option>
+                            <option value="2">Z</option>
+                            <option value="3">W</option>
+                        </select>
+                        B: <select id="rgb-b" class="axis-select">
+                            <option value="0">X</option>
+                            <option value="1">Y</option>
+                            <option value="2" selected>Z</option>
+                            <option value="3">W</option>
+                        </select>
+                    </span>
+                </h4>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <canvas id="rgbCube" width="400" height="350" style="background: rgba(0,0,0,0);"></canvas>
+                </div>
+            </div>
+
+            <div class="visuals"
+                style="text-align: center; border: 1px solid rgba(255,255,255,0.05); background: rgba(20,20,20,0.5);">
+                <h4 style="margin-top: 0; color: #aaa; font-weight: normal; margin-bottom: 20px;">
+                    Monge Projection <br>
+                    <span style="font-size: 14px; margin-top: 5px; display: inline-block;">
+                        R: <select id="monge-r" class="axis-select">
+                            <option value="0" selected>X</option>
+                            <option value="1">Y</option>
+                            <option value="2">Z</option>
+                            <option value="3">W</option>
+                        </select>
+                        G: <select id="monge-g" class="axis-select">
+                            <option value="0">X</option>
+                            <option value="1" selected>Y</option>
+                            <option value="2">Z</option>
+                            <option value="3">W</option>
+                        </select>
+                        B: <select id="monge-b" class="axis-select">
+                            <option value="0">X</option>
+                            <option value="1">Y</option>
+                            <option value="2" selected>Z</option>
+                            <option value="3">W</option>
+                        </select>
+                    </span>
+                </h4>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <canvas id="mongeCanvas" width="400" height="400"
+                        style="border-radius: 4px; box-shadow: inset 0 0 10px rgba(0,0,0,0.8); background: #111;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ОПИСАНИЕ -->
+    <div class="description" style="margin-left: 20px;">
+        <b>4D Decomposition Principle:</b> The system of 4 hyperplanes is decomposed into four triplets (groups of 3
+        equations).
+        For any given X coordinate on the axis, each triplet creates a system of 3 equations with 3 unknowns (Y, Z, W).
+        <br><br>
+        On the 1D canvas, <b>4 horizontal strips</b> are shown: each representing the solution space of one equation
+        triplet.
+        The resulting Y, Z, and W coordinates are mapped to the <b>Red</b>, <b>Green</b>, and <b>Blue</b> channels
+        respectively.
+        <br><br>
+        If a solution exists for the full 4x4 system, exactly at coordinate X, the colors of all 4 strips will perfectly
+        align and mix, representing the common coordinate point in the 4-dimensional space.
+    </div>
+
+    <script src="analysis.js"></script>
+</body>
+
+</html>

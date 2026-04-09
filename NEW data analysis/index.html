@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multidimensional Dataset Visualization</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>Multidimensional Points Mapping (6 Variables)</h2>
+
+    <div class="container">
+        
+        <div class="sidebar">
+            <div class="panel">
+                <h3>Coordinate Mapping</h3>
+                
+                <div class="mapping-row">
+                    <div class="mapping-label">
+                        <span class="color-dot" style="background:#fff"></span> X Axis
+                    </div>
+                    <select id="map-x" class="axis-select">
+                        <option value="area" selected>Area</option>
+                        <option value="dist">Distance to Center</option>
+                        <option value="price">Price</option>
+                        <option value="floor">Floor</option>
+                        <option value="year">Build Year</option>
+                        <option value="rooms">Rooms</option>
+                    </select>
+                </div>
+
+                <div class="mapping-row">
+                    <div class="mapping-label">
+                        <span class="color-dot" style="background:#fff"></span> Y Axis (Vertical)
+                    </div>
+                    <select id="map-y" class="axis-select">
+                        <option value="area">Area</option>
+                        <option value="dist">Distance to Center</option>
+                        <option value="price" selected>Price</option>
+                        <option value="floor">Floor</option>
+                        <option value="year">Build Year</option>
+                        <option value="rooms">Rooms</option>
+                    </select>
+                </div>
+
+                <div class="mapping-row">
+                    <div class="mapping-label">
+                        <span class="color-dot" style="background:#fff"></span> Z Axis
+                    </div>
+                    <select id="map-z" class="axis-select">
+                        <option value="area">Area</option>
+                        <option value="dist" selected>Distance to Center</option>
+                        <option value="price">Price</option>
+                        <option value="floor">Floor</option>
+                        <option value="year">Build Year</option>
+                        <option value="rooms">Rooms</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Color Mapping</h3>
+                
+                <div class="mapping-row">
+                    <div class="mapping-label">
+                        <input type="checkbox" id="toggle-r" checked>
+                        <span class="color-dot" style="background:#ff3333"></span> Red Channel
+                    </div>
+                    <select id="map-r" class="axis-select">
+                        <option value="area">Area</option>
+                        <option value="dist">Distance to Center</option>
+                        <option value="price">Price</option>
+                        <option value="floor">Floor</option>
+                        <option value="year" selected>Build Year</option>
+                        <option value="rooms">Rooms</option>
+                    </select>
+                </div>
+
+                <div class="mapping-row">
+                    <div class="mapping-label">
+                        <input type="checkbox" id="toggle-g" checked>
+                        <span class="color-dot" style="background:#33ff33"></span> Green Channel
+                    </div>
+                    <select id="map-g" class="axis-select">
+                        <option value="area">Area</option>
+                        <option value="dist">Distance to Center</option>
+                        <option value="price">Price</option>
+                        <option value="floor" selected>Floor</option>
+                        <option value="year">Build Year</option>
+                        <option value="rooms">Rooms</option>
+                    </select>
+                </div>
+
+                <div class="mapping-row">
+                    <div class="mapping-label">
+                        <input type="checkbox" id="toggle-b" checked>
+                        <span class="color-dot" style="background:#3377ff"></span> Blue Channel
+                    </div>
+                    <select id="map-b" class="axis-select">
+                        <option value="area">Area</option>
+                        <option value="dist">Distance to Center</option>
+                        <option value="price">Price</option>
+                        <option value="floor">Floor</option>
+                        <option value="year">Build Year</option>
+                        <option value="rooms" selected>Rooms</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Clipping Plane</h3>
+                
+                <div class="mapping-row">
+                    <div class="mapping-label">
+                        <input type="checkbox" id="toggle-clip">
+                        <span style="color: #ccc; margin-left: 5px;">Cut Front Points</span>
+                    </div>
+                </div>
+                
+                <div class="mapping-row" style="margin-top: 10px;">
+                    <div class="mapping-label" style="width: 100%; justify-content: space-between;">
+                        <span>Depth Cutoff</span>
+                        <span id="clip-depth-val" style="color: #fff;">100%</span>
+                    </div>
+                </div>
+                <div style="padding: 10px 0;">
+                    <input type="range" id="clip-depth" min="-100" max="100" value="100" style="width: 100%;">
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Legend / Info</h3>
+                <div style="font-size: 13px; color: #aaa; line-height: 1.5;">
+                    Data points: <span id="pt-count" style="color: #fff; font-weight: bold;">0</span><br>
+                    Points are plotted in an isometric 3D space. Hover over points to see exact values. Color intensity ranges from 0 to 255 based on the mapped variable's min and max values in the dataset.
+                </div>
+            </div>
+        </div>
+
+        <div class="visuals-container">
+            <canvas id="canvas3d" width="800" height="600"></canvas>
+            <div id="tooltip" class="tooltip"></div>
+        </div>
+
+    </div>
+
+    <!-- Load scripts -->
+    <script src="dataset.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
